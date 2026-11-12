@@ -85,6 +85,8 @@ def _print_setup(ws):
 
 def _put(ws, r, c, v, font=F_BASE, fill=None, fmt=None, border=True, align=None):
     cell = ws.cell(row=r, column=c, value=v)
+    if isinstance(v, str) and v.startswith("="):
+        cell.data_type = "s"     # PDF 원문·파일명이 수식으로 실행되지 않게 (수식 주입 방지)
     cell.font = font
     if fill:
         cell.fill = fill
